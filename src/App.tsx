@@ -12,7 +12,24 @@ const Chats = lazy(() => import("./pages/Chats"));
 const ChatRoom = lazy(() => import("./pages/ChatRoom"));
 
 function App() {
-	return <div>Hello</div>;
+	return (
+		<RecoilRoot>
+			<QueryClientProvider client={queryClient}>
+				<ThemeProvider theme={theme}>
+					<GlobalStyles />
+					<Normalize />
+					<Suspense fallback={<span>loading....</span>}>
+						<Router>
+							<Switch>
+								<Route path="/list" render={() => <Chats />} />
+								<Route path="/rooms/:room_id" render={() => <ChatRoom />} />
+							</Switch>
+						</Router>
+					</Suspense>
+				</ThemeProvider>
+			</QueryClientProvider>
+		</RecoilRoot>
+	);
 }
 
 export default App;
