@@ -2,15 +2,10 @@ import { Image as ImageType } from "../../../types/schema";
 import Image from "../../atoms/Image";
 import { memo } from "react";
 import styled from "styled-components";
-
-const Wrapper = styled.div`
-	display: flex;
-	align-items: center;
-	& > img:not(:last-child) {
-		margin-right: 10px;
-	}
-	overflow-x: hidden;
-`;
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./slick-slider.css";
 
 interface Props {
 	images: ImageType[];
@@ -18,17 +13,31 @@ interface Props {
 	handleClick: (src: string) => void;
 }
 
+const StyledImageSlider = styled(Slider)`
+	margin-left: 16px;
+	margin-bottom: 10px;
+	z-index: 1;
+`;
+
 const ImageSlider = ({ images, width, handleClick, ...props }: Props) => {
+	const settings = {
+		className: "slider variable-width",
+		arrows: false,
+		dots: false,
+		infinite: false,
+		slidesToShow: 6,
+		slidesToScroll: 1,
+		swipeToSlide: true,
+		variableWidth: true,
+	};
 	return (
-		<Wrapper {...props}>
+		<StyledImageSlider {...props} {...settings}>
 			{images.map((image) => (
-				<Image
-					width={width}
-					onClick={() => handleClick(image.src)}
-					{...image}
-				></Image>
+				<div style={{ width: 40 }}>
+					<Image {...image} onClick={() => handleClick(image.src)}></Image>
+				</div>
 			))}
-		</Wrapper>
+		</StyledImageSlider>
 	);
 };
 
