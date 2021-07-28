@@ -22,6 +22,7 @@ const SendButton = styled.div`
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
+	flex-shrink: 0;
 `;
 
 const StyledTextInput = styled(TextInput)`
