@@ -4,7 +4,6 @@ export const FlexBox = styled.div`
 	width: 100%;
 	height: 100vh;
 	max-width: 600px;
-	padding: 0 8px;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
